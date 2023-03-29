@@ -3,10 +3,10 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Api de catalogue de guihon!';
+    return 'Camwego API!';
   }
 
   getAuthor(): string {
-    return 'IDRISSHACKER'
+    return 'IDRISSHACKER';
   }
 }

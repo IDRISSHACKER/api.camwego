@@ -72,14 +72,14 @@ export class UsersService {
         !createUserInput.firstname ||
         !createUserInput.lastname
       ) {
-        return new Error('All fieds are required');
+        return new Error('Tout les chaps sont requis');
       }
       if (Object.keys(userInDb).length) {
-        return new Error('This user already exist!');
+        return new Error('Ce numero de téléphone est déjà pris!');
       }
       if (createUserInput.password.length < 4) {
         return new Error(
-          'Password is short, complete in 4 characteres or more',
+          'Votre mot de passe est trop court, elle doit être plus de 03 caractères',
         );
       }
       const user = new this.userModel(createUserInput);

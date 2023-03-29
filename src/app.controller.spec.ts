@@ -15,8 +15,8 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Api de catalogue de guihon!');
+    it('should return "Camwego API!"', () => {
+      expect(appController.getHello()).toBe('Camwego API!');
     });
   });
 });
