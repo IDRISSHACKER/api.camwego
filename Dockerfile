@@ -13,10 +13,7 @@ RUN npm install -g pnpm
 COPY package*.json ./
 RUN pnpm install
 
-COPY src src
-COPY ecosystem.config.js ./
-COPY nest-cli.json ./
-COPY tsconfig.json ./
+copy . .
 
 RUN pnpm run build
 
