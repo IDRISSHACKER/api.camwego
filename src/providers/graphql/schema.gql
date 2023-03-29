@@ -1,0 +1,53 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthPayload {
+  """token"""
+  token: String!
+
+  """user"""
+  user: [User!]!
+}
+
+input CreateUserInput {
+  """Firstname"""
+  firstname: String!
+
+  """Lastname"""
+  lastname: String!
+
+  """User password"""
+  password: String!
+
+  """User phone"""
+  phone: String!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  dropAllUser: Boolean!
+  dropUser(userId: String!): Boolean!
+  login(password: String!, username: String!): AuthPayload!
+}
+
+type Query {
+  getUsers: [User!]!
+  me(id: String!): [User!]!
+}
+
+type User {
+  _id: String
+
+  """Firstname"""
+  firstname: String!
+
+  """Lastname"""
+  lastname: String!
+
+  """User password"""
+  password: String!
+
+  """User phone"""
+  phone: String!
+}

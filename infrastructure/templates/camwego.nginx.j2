@@ -1,0 +1,33 @@
+upstream api_camwego
+{
+    server {{ server_name }};
+}
+
+server{
+    server_name {{ domain }} www.{{ domain }};
+    client_max_body_size {{ nginx_max_body_size }};
+
+    location / {
+
+        proxy_pass http://api_camwego;
+    }
+
+    listen [::]:443 ssl;
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/{{ domain }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ domain }}/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+server{
+     if ($host = {{ domain }}) {
+        return 301 https://$host$request_uri;
+    }
+    listen 80;
+    listen [::]:80;
+    server_name {{ domain }};
+    return 404;
+
+}
+
