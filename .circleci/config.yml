@@ -10,7 +10,7 @@ jobs:
       - run:
           name: login to docker hub
           command: |
-            echo "$DOCKERHUB_PASSWORD" | docker login --username idrissduval --password-stdin
+            docker login -u idrissduval -p $DOCKERHUB_PASSWORD
 
       - run: docker --version
 
