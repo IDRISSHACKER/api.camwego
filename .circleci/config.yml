@@ -38,11 +38,11 @@ jobs:
 
       - run:
           name: build image
-          command: docker build -t idrissduval/catalogue .
+          command: docker build -t idrissduval/api.camwego .
 
       - run:
           name: save image on docker regisgtry
-          command: docker push idrissduval/catalogue
+          command: docker push idrissduval/api.camwego
 
   prod:
     docker:

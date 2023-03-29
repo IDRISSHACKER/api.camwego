@@ -1,13 +1,13 @@
 ---
 - name: pulling image
   docker_image:
-    name: idrissduval/catalogue
+    name: idrissduval/api.camwego
     source: pull
 
 - name: start app inside a container
   docker_container:
     name: catalogue
-    image: idrissduval/catalogue
+    image: idrissduval/api.camwego
     state: started
     ports:
       - "8223:8000"
