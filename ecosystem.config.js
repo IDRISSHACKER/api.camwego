@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    name      : "CATALOGUE",
+    name      : "API.CAMWEGO",
     script    : "./dist/main.js",
     instances : "max",
     exec_mode : "cluster",
