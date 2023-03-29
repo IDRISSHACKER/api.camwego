@@ -99,11 +99,4 @@ export class UsersService {
       return new Error(error.message);
     }
   }
-  async dropAllUser() {
-    try {
-      return this.userModel.deleteMany({});
-    } catch (error) {
-      return new Error(error.message);
-    }
-  }
 }
