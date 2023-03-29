@@ -1,4 +1,4 @@
-import {Args, extend, Mutation, Query, Resolver} from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UsersService } from './users.service';
 import { CreateUserInput } from './dto/createUser.input';
 import { User } from './entity/user.entity';
@@ -7,7 +7,7 @@ import { JwtAuthGuard } from '../../guard/authGuard';
 import { AuthPayload } from './entity/auth.entity';
 import { ReqHeaders } from '../../decorator/req-hrader.decorator';
 
-interface myHeaders extends Headers {
+export interface myHeaders extends Headers {
   authorization: string;
 }
 
@@ -20,7 +20,7 @@ export class UsersResolver {
   }
   @UseGuards(JwtAuthGuard)
   @Query(() => [User])
-  async me(@Args('id') id: string, @ReqHeaders() headers) {
+  async me(@Args('id') id: string, @ReqHeaders() headers: myHeaders) {
     return this.usersService.me(id, headers);
   }
 
@@ -35,10 +35,6 @@ export class UsersResolver {
   @Mutation(() => Boolean)
   async dropUser(@Args('userId') userId: string) {
     return await this.usersService.dropUser(userId);
-  }
-  @Mutation(() => Boolean)
-  async dropAllUser() {
-    return await this.usersService.dropAllUser();
   }
   @Mutation(() => User)
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {

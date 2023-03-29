@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { CreateUserInput } from './dto/createUser.input';
 import { User } from './entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
-import { ReqHeaders } from '../../decorator/req-hrader.decorator';
+import { myHeaders } from './users.resolver';
 
 @Injectable()
 export class UsersService {
@@ -26,14 +26,15 @@ export class UsersService {
       return new Error(error.message);
     }
   }
-  async me(id: string, headers) {
-    console.log(headers);
+
+  async me(id: string, headers: myHeaders) {
+    console.log(headers.authorization);
     try {
       const userResult = await this.userModel.find({
         _id: id,
       });
       if (!Object.keys(userResult).length) {
-        return new Error('User not found');
+        return new Error('Numero de téléphone ou mot de passe incorect');
       }
       return userResult;
     } catch (error) {
