@@ -55,7 +55,7 @@ export class UsersService {
           user: userResult,
         };
       } else {
-        return new Error('Username or password wrong');
+        return new Error('Email ou mot de passe incorect!');
       }
     } catch (error) {
       return new Error(error.message);
