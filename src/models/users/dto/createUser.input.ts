@@ -1,4 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
+import { Schema as MongooseSchema } from 'mongoose';
 @InputType()
 export class CreateUserInput {
   @Field(() => String, { description: 'Firstname' })
@@ -12,4 +13,7 @@ export class CreateUserInput {
 
   @Field(() => String, { description: 'User password' })
   password: string;
+
+  @Field(() => String, { description: 'User type', nullable: true })
+  typeId: MongooseSchema.Types.ObjectId;
 }

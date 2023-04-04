@@ -5,7 +5,6 @@ export const ReqHeaders = createParamDecorator(
   async (data: unknown, context: ExecutionContext) => {
     const ctx = GqlExecutionContext.create(context);
     const { req } = ctx.getContext();
-    console.log(req);
     return req.headers;
   },
 );

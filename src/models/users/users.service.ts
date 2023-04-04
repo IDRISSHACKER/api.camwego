@@ -1,19 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Schema as MongooseSchema } from 'mongoose';
 import { CreateUserInput } from './dto/createUser.input';
 import { User } from './entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { myHeaders } from './users.resolver';
+import { UserTypeService } from '../user_type/userType.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel(User.name)
     private readonly userModel: Model<User>,
+    private readonly userTypeService: UserTypeService,
     private jwtService: JwtService,
   ) {}
 
+  async findUserByTrajet(userId: MongooseSchema.Types.ObjectId) {
+    return this.userModel.findOne({
+      _id: userId,
+    });
+  }
+  async findUserByCar(userId: MongooseSchema.Types.ObjectId) {
+    return this.userModel.findOne({
+      _id: userId,
+    });
+  }
+
+  async findUserTypeByUserId(typeId: MongooseSchema.Types.ObjectId) {
+    return await this.userTypeService.findOne(typeId);
+  }
   async getUsers() {
     try {
       const users = await this.userModel.find();
@@ -28,7 +44,6 @@ export class UsersService {
   }
 
   async me(id: string, headers: myHeaders) {
-    console.log(headers.authorization);
     try {
       const userResult = await this.userModel.find({
         _id: id,

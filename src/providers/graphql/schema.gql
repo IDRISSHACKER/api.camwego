@@ -10,6 +10,49 @@ type AuthPayload {
   user: [User!]!
 }
 
+type Car {
+  _id: String
+
+  """Brand of car"""
+  brand: String
+
+  """Gray card"""
+  grayCard: String
+
+  """Places"""
+  nbPace: String
+
+  """Registration"""
+  registration: String
+
+  """Technical visit"""
+  technicalVisit: String
+  user: User!
+
+  """User id"""
+  userId: String
+}
+
+input CreateCarInput {
+  """Brand of car"""
+  brand: String!
+
+  """Gray card"""
+  grayCard: String!
+
+  """Places"""
+  nbPace: String!
+
+  """Registration"""
+  registration: String!
+
+  """Technical visit"""
+  technicalVisit: String!
+
+  """User id"""
+  userId: String!
+}
+
 input CreateUserInput {
   """Firstname"""
   firstname: String!
@@ -22,17 +65,48 @@ input CreateUserInput {
 
   """User phone"""
   phone: String!
+
+  """User type"""
+  typeId: String
+}
+
+input CreateUserTypeInput {
+  """label"""
+  label: String!
 }
 
 type Mutation {
+  addUserType(createUserTypeInput: CreateUserTypeInput!): UserType!
+  createCar(createCarInput: CreateCarInput!): Car!
+  createTrajet: Trajet!
   createUser(createUserInput: CreateUserInput!): User!
   dropUser(userId: String!): Boolean!
   login(password: String!, username: String!): AuthPayload!
 }
 
 type Query {
+  getCars: [Car!]!
+  getTrajets: [Trajet!]!
+  getUserTypes: [UserType!]!
   getUsers: [User!]!
   me(id: String!): [User!]!
+}
+
+type Trajet {
+  _id: String
+
+  """From"""
+  from: String!
+
+  """Price"""
+  price: Int!
+
+  """To"""
+  to: String!
+  user: User!
+
+  """userId"""
+  userId: String!
 }
 
 type User {
@@ -49,4 +123,17 @@ type User {
 
   """User phone"""
   phone: String!
+
+  """User type id"""
+  typeId: String
+
+  """User Type"""
+  userType: UserType
+}
+
+type UserType {
+  _id: String
+
+  """label"""
+  label: String
 }
