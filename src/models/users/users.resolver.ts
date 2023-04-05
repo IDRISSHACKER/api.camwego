@@ -9,15 +9,12 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserInput } from './dto/createUser.input';
 import { User } from './entity/user.entity';
-import { UseGuards, Headers } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../guard/authGuard';
 import { AuthPayload } from './entity/auth.entity';
 import { ReqHeaders } from '../../decorator/req-hrader.decorator';
 import { UserType } from '../user_type/entity/userType.entity';
-
-export interface myHeaders extends Headers {
-  authorization: string;
-}
+import { myHeaders } from '../../interfaces/headers.interface';
 
 @Resolver(() => User)
 export class UsersResolver {

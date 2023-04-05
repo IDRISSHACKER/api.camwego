@@ -1,4 +1,5 @@
 import {
+  Args,
   Mutation,
   Parent,
   Query,
@@ -25,7 +26,7 @@ export class TrajetResolver {
   }
 
   @Mutation(() => Trajet)
-  async createTrajet(createTrajetInput: CreateTrajetInput) {
+  async createTrajet(@Args('createTrajetInput') createTrajetInput: CreateTrajetInput) {
     return await this.trajetService.createTrajet(createTrajetInput);
   }
 }

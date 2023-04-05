@@ -1,4 +1,4 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 @InputType()
 export class CreateTrajetInput {
@@ -8,9 +8,9 @@ export class CreateTrajetInput {
   @Field(() => String, { description: 'To' })
   to: string;
 
-  @Field(() => Int, { description: 'Price' })
+  @Field(() => Number, { description: 'Price' })
   price: number;
 
-  @Field(() => MongooseSchema.Types.ObjectId, { description: 'userId' })
+  @Field(() => String, { description: 'userId' })
   userId: MongooseSchema.Types.ObjectId;
 }

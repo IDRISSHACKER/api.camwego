@@ -16,6 +16,11 @@ export class UsersService {
     private jwtService: JwtService,
   ) {}
 
+  async findOne(userId: MongooseSchema.Types.ObjectId) {
+    return this.userModel.findOne({
+      _id: userId,
+    });
+  }
   async findUserByTrajet(userId: MongooseSchema.Types.ObjectId) {
     return this.userModel.findOne({
       _id: userId,

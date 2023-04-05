@@ -53,6 +53,34 @@ input CreateCarInput {
   userId: String!
 }
 
+input CreateTrajetInput {
+  """From"""
+  from: String!
+
+  """Price"""
+  price: Float!
+
+  """To"""
+  to: String!
+
+  """userId"""
+  userId: String!
+}
+
+input CreateTravelInput {
+  """Accepted"""
+  accepted: Boolean!
+
+  """DriverID"""
+  driverID: String!
+
+  """TrajetID"""
+  trajetID: String!
+
+  """UserID"""
+  userID: String!
+}
+
 input CreateUserInput {
   """Firstname"""
   firstname: String!
@@ -78,7 +106,8 @@ input CreateUserTypeInput {
 type Mutation {
   addUserType(createUserTypeInput: CreateUserTypeInput!): UserType!
   createCar(createCarInput: CreateCarInput!): Car!
-  createTrajet: Trajet!
+  createTrajet(createTrajetInput: CreateTrajetInput!): Trajet!
+  createTravel(createTravelInput: CreateTravelInput!): Travel!
   createUser(createUserInput: CreateUserInput!): User!
   dropUser(userId: String!): Boolean!
   login(password: String!, username: String!): AuthPayload!
@@ -87,6 +116,7 @@ type Mutation {
 type Query {
   getCars: [Car!]!
   getTrajets: [Trajet!]!
+  getTravels: [Travel!]!
   getUserTypes: [UserType!]!
   getUsers: [User!]!
   me(id: String!): [User!]!
@@ -107,6 +137,34 @@ type Trajet {
 
   """userId"""
   userId: String!
+}
+
+type Travel {
+  _id: String
+
+  """Accepted"""
+  accepted: Boolean!
+
+  """Brand of car"""
+  brand: String
+
+  """Driver (Instance of user)"""
+  driver: User
+
+  """DriverID"""
+  driverID: String!
+
+  """Travel"""
+  trajet: Trajet
+
+  """TrajetID"""
+  trajetID: String!
+
+  """User"""
+  user: User
+
+  """UserID"""
+  userID: String!
 }
 
 type User {

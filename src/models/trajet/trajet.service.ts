@@ -13,9 +13,14 @@ export class TrajetService {
     private readonly userService: UsersService,
   ) {}
 
+  async findOne(trajetID: MongooseSchema.Types.ObjectId) {
+    this.trajetModel.findOne({ _id: trajetID });
+  }
+
   async findTrajetByUserId(userId: MongooseSchema.Types.ObjectId) {
     return this.userService.findUserByTrajet(userId);
   }
+
   async getTrajets() {
     return this.trajetModel.find();
   }
