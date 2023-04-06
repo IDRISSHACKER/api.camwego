@@ -14,8 +14,8 @@ export class Car {
   brand: string;
 
   @Prop()
-  @Field(() => String, { description: 'Places', nullable: true })
-  nbPace: string;
+  @Field(() => Number, { description: 'Places', nullable: true })
+  nbPace: MongooseSchema.Types.Number;
 
   @Prop()
   @Field(() => String, { description: 'Registration', nullable: true })
@@ -34,7 +34,7 @@ export class Car {
   userId: MongooseSchema.Types.ObjectId;
 
   @Field(() => User, { description: 'User', nullable: true })
-  user: User;
+  user?: User;
 }
 
 export const CarSchema = SchemaFactory.createForClass(Car);

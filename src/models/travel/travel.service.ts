@@ -14,6 +14,12 @@ export class TravelService {
     private readonly trajetService: TrajetService,
   ) {}
 
+  async findAllByTrajetID(trajetID: MongooseSchema.Types.ObjectId) {
+    return this.travelModel.find({
+      trajetID: trajetID,
+    });
+  }
+
   async getTravels() {
     return this.travelModel.find();
   }

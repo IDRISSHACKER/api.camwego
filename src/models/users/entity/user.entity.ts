@@ -2,7 +2,6 @@ import { ObjectType, Field } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { UserType } from '../../user_type/entity/userType.entity';
-import {Car} from "../../car/entity/car";
 
 @Schema()
 @ObjectType('User')
@@ -28,11 +27,10 @@ export class User {
 
   @Prop()
   @Field(() => String, { description: 'User type id', nullable: true })
-  typeId: MongooseSchema.Types.ObjectId;
+  typeId?: MongooseSchema.Types.ObjectId;
 
   @Field(() => UserType, { description: 'User Type', nullable: true })
   userType?: UserType;
-
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

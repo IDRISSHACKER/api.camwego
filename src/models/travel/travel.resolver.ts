@@ -25,11 +25,6 @@ export class TravelResolver {
     return await this.travelService.getTrajetByTravel(travel.trajetID);
   }
 
-  @ResolveField('driver', () => User)
-  async driver(@Parent() travel: Travel) {
-    return await this.travelService.getDriverByTravel(travel.driverID);
-  }
-
   @Query(() => [Travel])
   async getTravels() {
     return await this.travelService.getTravels();

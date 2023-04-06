@@ -15,6 +15,7 @@ import { AuthPayload } from './entity/auth.entity';
 import { ReqHeaders } from '../../decorator/req-hrader.decorator';
 import { UserType } from '../user_type/entity/userType.entity';
 import { myHeaders } from '../../interfaces/headers.interface';
+import { UpdateUserInput } from './dto/updateUser.input';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -32,8 +33,8 @@ export class UsersResolver {
 
   @UseGuards(JwtAuthGuard)
   @Query(() => [User])
-  async me(@Args('id') id: string, @ReqHeaders() headers: myHeaders) {
-    return this.usersService.me(id, headers);
+  async me(@Args('id') id: string) {
+    return this.usersService.me(id);
   }
 
   @Mutation(() => AuthPayload)
@@ -43,6 +44,7 @@ export class UsersResolver {
   ) {
     return await this.usersService.login(username, password);
   }
+
   @UseGuards(JwtAuthGuard)
   @Mutation(() => Boolean)
   async dropUser(@Args('userId') userId: string) {
@@ -52,5 +54,13 @@ export class UsersResolver {
   @Mutation(() => User)
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.usersService.createUser(createUserInput);
+  }
+
+  @Mutation(() => User)
+  updateUser(
+    @Args('userID') userID: string,
+    @Args('updateUserInput') updateUserInput: UpdateUserInput,
+  ) {
+    return this.usersService.updateUser(userID, updateUserInput);
   }
 }

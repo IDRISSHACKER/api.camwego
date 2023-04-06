@@ -11,10 +11,6 @@ export class Travel {
   _id: MongooseSchema.Types.ObjectId;
 
   @Prop()
-  @Field(() => String, { description: 'Brand of car', nullable: true })
-  brand: string;
-
-  @Prop()
   @Field(() => String, { description: 'TrajetID' })
   trajetID: MongooseSchema.Types.ObjectId;
 
@@ -23,24 +19,21 @@ export class Travel {
   userID: MongooseSchema.Types.ObjectId;
 
   @Prop()
-  @Field(() => String, { description: 'DriverID' })
-  driverID: MongooseSchema.Types.ObjectId;
+  @Field(() => Number, { description: 'number of user' })
+  nbPlace: MongooseSchema.Types.Number;
 
   @Prop()
-  @Field(() => Boolean, { description: 'Accepted' })
-  accepted: boolean;
+  @Field(() => Boolean, { description: 'Accepted', defaultValue: true })
+  accepted?: boolean;
 
   @Field(() => User, { description: 'User', nullable: true })
   user: User;
 
-  @Field(() => Trajet, { description: 'Travel', nullable: true })
-  trajet: Trajet;
-
-  @Field(() => User, {
-    description: 'Driver (Instance of user)',
+  @Field(() => Trajet, {
+    description: 'Travel (Instance of user)',
     nullable: true,
   })
-  driver: User;
+  trajet: Trajet;
 }
 
 export const TravelSchema = SchemaFactory.createForClass(Travel);

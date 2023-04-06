@@ -15,5 +15,5 @@ export class CreateUserInput {
   password: string;
 
   @Field(() => String, { description: 'User type', nullable: true })
-  typeId: MongooseSchema.Types.ObjectId;
+  typeId?: MongooseSchema.Types.ObjectId;
 }

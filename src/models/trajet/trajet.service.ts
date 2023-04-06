@@ -17,6 +17,12 @@ export class TrajetService {
     this.trajetModel.findOne({ _id: trajetID });
   }
 
+  /*async requestNBPlaceOccupied(trajetID: MongooseSchema.Types.ObjectId) {
+    const request = await this.travelService.findAllByTrajetID(trajetID);
+    console.log(request);
+    return Object.keys(request).length;
+  }*/
+
   async findTrajetByUserId(userId: MongooseSchema.Types.ObjectId) {
     return this.userService.findUserByTrajet(userId);
   }

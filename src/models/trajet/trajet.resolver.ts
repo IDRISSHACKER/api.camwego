@@ -20,6 +20,11 @@ export class TrajetResolver {
     return await this.trajetService.findTrajetByUserId(trajet.userId);
   }
 
+  //@ResolveField('nbPlaceOccupied', () => Number)
+  //async nbPlaceOccupied(@Parent() trajet: Trajet) {
+  //return await this.trajetService.requestNBPlaceOccupied(trajet._id);
+  //}
+
   @Query(() => [Trajet])
   getTrajets() {
     return this.trajetService.getTrajets();

@@ -6,8 +6,8 @@ export class CreateCarInput {
   @Field(() => String, { description: 'Brand of car' })
   brand: string;
 
-  @Field(() => String, { description: 'Places' })
-  nbPace: string;
+  @Field(() => Number, { description: 'Places', nullable: true })
+  nbPace: MongooseSchema.Types.Number;
 
   @Field(() => String, { description: 'Registration' })
   registration: string;

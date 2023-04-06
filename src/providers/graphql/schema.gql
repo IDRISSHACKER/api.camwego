@@ -20,7 +20,7 @@ type Car {
   grayCard: String
 
   """Places"""
-  nbPace: String
+  nbPace: Float
 
   """Registration"""
   registration: String
@@ -33,6 +33,19 @@ type Car {
   userId: String
 }
 
+type City {
+  _id: String
+
+  """Name of city"""
+  label: String!
+
+  """Latitude"""
+  latitude: String
+
+  """Longitude"""
+  longitude: String
+}
+
 input CreateCarInput {
   """Brand of car"""
   brand: String!
@@ -41,7 +54,7 @@ input CreateCarInput {
   grayCard: String!
 
   """Places"""
-  nbPace: String!
+  nbPace: Float
 
   """Registration"""
   registration: String!
@@ -53,29 +66,37 @@ input CreateCarInput {
   userId: String!
 }
 
+input CreateCityInput {
+  """Name of city"""
+  label: String!
+
+  """Latitude"""
+  latitude: String
+
+  """Longitude"""
+  longitude: String
+}
+
 input CreateTrajetInput {
-  """From"""
-  from: String!
+  """fromCityID """
+  fromCityID: String!
 
   """Price"""
   price: Float!
 
-  """To"""
-  to: String!
+  """Travel start date"""
+  startDate: DateTime!
+
+  """toCityID"""
+  toCityID: String!
 
   """userId"""
   userId: String!
 }
 
 input CreateTravelInput {
-  """Accepted"""
-  accepted: Boolean!
-
-  """DriverID"""
-  driverID: String!
-
-  """TrajetID"""
-  trajetID: String!
+  """number of user"""
+  nbPlace: Float!
 
   """UserID"""
   userID: String!
@@ -103,18 +124,26 @@ input CreateUserTypeInput {
   label: String!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Mutation {
   addUserType(createUserTypeInput: CreateUserTypeInput!): UserType!
   createCar(createCarInput: CreateCarInput!): Car!
+  createCity(createCityInput: CreateCityInput!): City!
   createTrajet(createTrajetInput: CreateTrajetInput!): Trajet!
   createTravel(createTravelInput: CreateTravelInput!): Travel!
   createUser(createUserInput: CreateUserInput!): User!
   dropUser(userId: String!): Boolean!
   login(password: String!, username: String!): AuthPayload!
+  updateUser(updateUserInput: UpdateUserInput!, userID: String!): User!
 }
 
 type Query {
   getCars: [Car!]!
+  getCities: [City!]!
   getTrajets: [Trajet!]!
   getTravels: [Travel!]!
   getUserTypes: [UserType!]!
@@ -125,14 +154,26 @@ type Query {
 type Trajet {
   _id: String
 
-  """From"""
-  from: String!
+  """City Model"""
+  from: City!
+
+  """fromCityID """
+  fromCityID: String!
+
+  """Number of seats occupied"""
+  nbPlaceOccupied: Float!
 
   """Price"""
   price: Int!
 
-  """To"""
-  to: String!
+  """Travel start date"""
+  startDate: DateTime!
+
+  """City Model"""
+  to: City!
+
+  """toCityID"""
+  toCityID: String!
   user: User!
 
   """userId"""
@@ -145,16 +186,10 @@ type Travel {
   """Accepted"""
   accepted: Boolean!
 
-  """Brand of car"""
-  brand: String
+  """number of user"""
+  nbPlace: Float!
 
-  """Driver (Instance of user)"""
-  driver: User
-
-  """DriverID"""
-  driverID: String!
-
-  """Travel"""
+  """Travel (Instance of user)"""
   trajet: Trajet
 
   """TrajetID"""
@@ -165,6 +200,23 @@ type Travel {
 
   """UserID"""
   userID: String!
+}
+
+input UpdateUserInput {
+  """Firstname"""
+  firstname: String
+
+  """Lastname"""
+  lastname: String
+
+  """User password"""
+  password: String
+
+  """User phone"""
+  phone: String
+
+  """User type"""
+  typeId: String
 }
 
 type User {

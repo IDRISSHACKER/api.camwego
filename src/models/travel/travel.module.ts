@@ -12,6 +12,8 @@ import { Travel, TravelSchema } from './entity/travel.entity';
 import { Trajet, TrajetSchema } from '../trajet/entity/trajet.entity';
 import { TrajetService } from '../trajet/trajet.service';
 import { TravelService } from './travel.service';
+import {City, CitySchema} from "../city/entity/city.entity";
+import {CityService} from "../city/city.service";
 
 @Module({
   imports: [
@@ -21,6 +23,7 @@ import { TravelService } from './travel.service';
       { name: User.name, schema: UserSchema },
       { name: UserType.name, schema: UserTypeSchema },
       { name: Car.name, schema: CarSchema },
+      { name: City.name, schema: CitySchema },
     ]),
     JwtModule,
   ],
@@ -31,6 +34,7 @@ import { TravelService } from './travel.service';
     TrajetService,
     UsersService,
     CarService,
+    CityService,
   ],
 })
 export class TravelModule {}

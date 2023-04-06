@@ -10,23 +10,31 @@ import { Car, CarSchema } from '../car/entity/car';
 import { JwtModule } from '@nestjs/jwt';
 import { CarService } from '../car/car.service';
 import { UserTypeService } from '../user_type/userType.service';
+import { TravelService } from '../travel/travel.service';
+import { Travel, TravelSchema } from '../travel/entity/travel.entity';
+import { CityService } from '../city/city.service';
+import { City, CitySchema } from '../city/entity/city.entity';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: Trajet.name, schema: TrajetSchema },
+      { name: Travel.name, schema: TravelSchema },
       { name: User.name, schema: UserSchema },
       { name: UserType.name, schema: UserTypeSchema },
       { name: Car.name, schema: CarSchema },
+      { name: City.name, schema: CitySchema },
     ]),
     JwtModule,
   ],
   providers: [
     TrajetResolver,
-    UserTypeService,
     TrajetService,
+    TravelService,
     UsersService,
+    UserTypeService,
     CarService,
+    CityService,
   ],
 })
-export class TrajetModule {}
+export class RouteModule {}

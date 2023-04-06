@@ -9,8 +9,9 @@ import { UsersModule } from './models/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserTypeModule } from './models/user_type/userType.module';
 import { CarModule } from './models/car/car.module';
-import { TrajetModule } from './models/trajet/trajet.module';
+import { RouteModule } from './models/trajet/route.module';
 import { TravelModule } from './models/travel/travel.module';
+import { CityModule } from './models/city/city.module';
 
 @Module({
   imports: [
@@ -25,8 +26,9 @@ import { TravelModule } from './models/travel/travel.module';
     UsersModule,
     UserTypeModule,
     CarModule,
-    TrajetModule,
+    RouteModule,
     TravelModule,
+    CityModule,
   ],
   controllers: [AppController],
   providers: [AppService],

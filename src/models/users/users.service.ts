@@ -4,8 +4,8 @@ import { Model, Schema as MongooseSchema } from 'mongoose';
 import { CreateUserInput } from './dto/createUser.input';
 import { User } from './entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
-import { myHeaders } from './users.resolver';
 import { UserTypeService } from '../user_type/userType.service';
+import { UpdateUserInput } from './dto/updateUser.input';
 
 @Injectable()
 export class UsersService {
@@ -48,7 +48,7 @@ export class UsersService {
     }
   }
 
-  async me(id: string, headers: myHeaders) {
+  async me(id: string) {
     try {
       const userResult = await this.userModel.find({
         _id: id,
@@ -109,6 +109,9 @@ export class UsersService {
     } catch (error) {
       return new Error(error.message);
     }
+  }
+  async updateUser(userId: string, updateUserInput: UpdateUserInput) {
+    return this.userModel.updateOne({ _id: userId }, updateUserInput);
   }
   async dropUser(userId: string) {
     try {
