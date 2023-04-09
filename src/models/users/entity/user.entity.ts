@@ -30,7 +30,7 @@ export class User {
   typeId?: MongooseSchema.Types.ObjectId;
 
   @Field(() => UserType, { description: 'User Type', nullable: true })
-  userType?: UserType;
+  userType: UserType;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

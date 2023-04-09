@@ -39,6 +39,25 @@ export class TravelResolver {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Query(() => [Travel])
+  async getMyTravels(@ReqHeaders() headers: myHeaders) {
+    const user: User = this.jwtService.verify(
+      headers.authorization?.split(' ')[1],
+    ).user;
+
+    console.log(user);
+
+    const userType = await this.travelService.resolveUserType(user.typeId);
+
+    console.log(userType);
+
+    if (userType.label === 'driver') {
+      return await this.travelService.getMyTravels(user._id, true);
+    }
+    return await this.travelService.getMyTravels(user._id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => Travel)
   createTravel(
     @Args('createTravelInput') createTravelInput: CreateTravelInput,

@@ -144,6 +144,7 @@ type Query {
   getCars: [Car!]!
   getCities: [City!]!
   getMyTrajets: [Trajet!]!
+  getMyTravels: [Travel!]!
   getTrajets: [Trajet!]!
   getTravels: [Travel!]!
   getUserTypes: [UserType!]!

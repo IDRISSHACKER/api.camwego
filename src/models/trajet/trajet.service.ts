@@ -18,7 +18,11 @@ export class TrajetService {
   ) {}
 
   async findOne(trajetID: MongooseSchema.Types.ObjectId) {
-    this.trajetModel.findOne({ _id: trajetID });
+    return this.trajetModel.findOne({ _id: trajetID });
+  }
+
+  async findAll(trajetID: MongooseSchema.Types.ObjectId) {
+    return this.trajetModel.find({ _id: trajetID });
   }
 
   async resolveTrajetFromCar(carID: MongooseSchema.Types.ObjectId) {
