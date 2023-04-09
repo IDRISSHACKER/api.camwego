@@ -12,6 +12,12 @@ export class CarService {
     private readonly userService: UsersService,
   ) {}
 
+  async findOne(carID: MongooseSchema.Types.ObjectId) {
+    return this.CarModel.findOne({ _id: carID });
+  }
+  async findOneBy(userID: MongooseSchema.Types.ObjectId) {
+    return this.CarModel.findOne({ userId: userID });
+  }
   async getUserByCarId(userId: MongooseSchema.Types.ObjectId) {
     return this.userService.findUserByCar(userId);
   }

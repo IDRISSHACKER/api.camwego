@@ -12,9 +12,6 @@ export class CreateTrajetInput {
   @Field(() => Number, { description: 'Price' })
   price: number;
 
-  @Field(() => String, { description: 'userId' })
-  userId: MongooseSchema.Types.ObjectId;
-
   @Field(() => Date, { description: 'Travel start date' })
   startDate: MongooseSchema.Types.Date;
 }

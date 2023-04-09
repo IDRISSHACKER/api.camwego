@@ -3,6 +3,7 @@ import { Schema as MongooseSchema } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { User } from '../../users/entity/user.entity';
 import { City } from '../../city/entity/city.entity';
+import { Car } from '../../car/entity/car';
 
 @Schema()
 @ObjectType('Trajet')
@@ -16,9 +17,16 @@ export class Trajet {
   @Field(() => City, { description: 'City Model' })
   to: City;
 
+  @Field(() => Car, { description: 'Car' })
+  car: Car;
+
   @Prop()
   @Field(() => Date, { description: 'Travel start date' })
   startDate: MongooseSchema.Types.Date;
+
+  @Prop()
+  @Field(() => String, { description: 'carID ' })
+  carID: MongooseSchema.Types.ObjectId;
 
   @Prop()
   @Field(() => String, { description: 'fromCityID ' })

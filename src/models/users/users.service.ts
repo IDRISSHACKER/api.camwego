@@ -69,7 +69,7 @@ export class UsersService {
       });
 
       if (Object.keys(userResult).length) {
-        const payload = { user: userResult };
+        const payload = { user: userResult[0] };
         return {
           token: this.jwtService.sign(payload),
           user: userResult,

@@ -4,6 +4,8 @@ import { Model, Schema as MongooseSchema } from 'mongoose';
 import { Trajet } from './entity/trajet.entity';
 import { CreateTrajetInput } from './dto/createTrajet.input';
 import { UsersService } from '../users/users.service';
+import { CityService } from '../city/city.service';
+import { CarService } from '../car/car.service';
 
 @Injectable()
 export class TrajetService {
@@ -11,17 +13,20 @@ export class TrajetService {
     @InjectModel(Trajet.name)
     private readonly trajetModel: Model<Trajet>,
     private readonly userService: UsersService,
+    private readonly cityService: CityService,
+    private readonly carService: CarService,
   ) {}
 
   async findOne(trajetID: MongooseSchema.Types.ObjectId) {
     this.trajetModel.findOne({ _id: trajetID });
   }
 
-  /*async requestNBPlaceOccupied(trajetID: MongooseSchema.Types.ObjectId) {
-    const request = await this.travelService.findAllByTrajetID(trajetID);
-    console.log(request);
-    return Object.keys(request).length;
-  }*/
+  async resolveTrajetFromCar(carID: MongooseSchema.Types.ObjectId) {
+    return this.carService.findOne(carID);
+  }
+  async resolveTrajetFromCity(cityID: MongooseSchema.Types.ObjectId) {
+    return this.cityService.findOne(cityID);
+  }
 
   async findTrajetByUserId(userId: MongooseSchema.Types.ObjectId) {
     return this.userService.findUserByTrajet(userId);
@@ -31,7 +36,21 @@ export class TrajetService {
     return this.trajetModel.find();
   }
 
-  async createTrajet(createTrajetInput: CreateTrajetInput) {
-    return this.trajetModel.create(createTrajetInput);
+  async getMyTrajets(userID: MongooseSchema.Types.ObjectId) {
+    return this.trajetModel.find({
+      userId: userID,
+    });
+  }
+
+  async createTrajet(
+    userID: MongooseSchema.Types.ObjectId,
+    createTrajetInput: CreateTrajetInput,
+  ) {
+    const car = await this.carService.findOneBy(userID);
+    return this.trajetModel.create({
+      ...createTrajetInput,
+      userId: userID,
+      carID: car._id,
+    });
   }
 }

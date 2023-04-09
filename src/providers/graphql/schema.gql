@@ -89,17 +89,16 @@ input CreateTrajetInput {
 
   """toCityID"""
   toCityID: String!
-
-  """userId"""
-  userId: String!
 }
 
 input CreateTravelInput {
+  _id: String
+
   """number of user"""
   nbPlace: Float!
 
-  """UserID"""
-  userID: String!
+  """TrajetID"""
+  trajetID: String!
 }
 
 input CreateUserInput {
@@ -144,6 +143,7 @@ type Mutation {
 type Query {
   getCars: [Car!]!
   getCities: [City!]!
+  getMyTrajets: [Trajet!]!
   getTrajets: [Trajet!]!
   getTravels: [Travel!]!
   getUserTypes: [UserType!]!
@@ -153,6 +153,12 @@ type Query {
 
 type Trajet {
   _id: String
+
+  """Car"""
+  car: Car!
+
+  """carID """
+  carID: String!
 
   """City Model"""
   from: City!
@@ -174,6 +180,8 @@ type Trajet {
 
   """toCityID"""
   toCityID: String!
+
+  """User (Intance of user)"""
   user: User!
 
   """userId"""

@@ -11,10 +11,18 @@ import { Travel } from './entity/travel.entity';
 import { TravelService } from './travel.service';
 import { CreateTravelInput } from './dto/createTravel.input';
 import { Trajet } from '../trajet/entity/trajet.entity';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../../guard/authGuard';
+import { ReqHeaders } from '../../decorator/req-hrader.decorator';
+import { myHeaders } from '../../interfaces/headers.interface';
+import { JwtService } from '@nestjs/jwt';
 
 @Resolver(() => Travel)
 export class TravelResolver {
-  constructor(private readonly travelService: TravelService) {}
+  constructor(
+    private readonly travelService: TravelService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   @ResolveField('user', () => User)
   async user(@Parent() travel: Travel) {
@@ -30,10 +38,15 @@ export class TravelResolver {
     return await this.travelService.getTravels();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => Travel)
   createTravel(
     @Args('createTravelInput') createTravelInput: CreateTravelInput,
+    @ReqHeaders() headers: myHeaders,
   ) {
-    return this.travelService.setTravel(createTravelInput);
+    const user: User = this.jwtService.verify(
+      headers.authorization?.split(' ')[1],
+    ).user;
+    return this.travelService.setTravel(user._id, createTravelInput);
   }
 }

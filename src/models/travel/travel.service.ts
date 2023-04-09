@@ -36,7 +36,13 @@ export class TravelService {
     await this.userService.findOne(userId);
   }
 
-  async setTravel(createTravelInput: CreateTravelInput) {
-    return this.travelModel.create(createTravelInput);
+  async setTravel(
+    userID: MongooseSchema.Types.ObjectId,
+    createTravelInput: CreateTravelInput,
+  ) {
+    return this.travelModel.create({
+      userID,
+      ...createTravelInput,
+    });
   }
 }

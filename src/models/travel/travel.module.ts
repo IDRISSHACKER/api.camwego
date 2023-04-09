@@ -12,11 +12,14 @@ import { Travel, TravelSchema } from './entity/travel.entity';
 import { Trajet, TrajetSchema } from '../trajet/entity/trajet.entity';
 import { TrajetService } from '../trajet/trajet.service';
 import { TravelService } from './travel.service';
-import {City, CitySchema} from "../city/entity/city.entity";
-import {CityService} from "../city/city.service";
+import { City, CitySchema } from '../city/entity/city.entity';
+import { CityService } from '../city/city.service';
 
 @Module({
   imports: [
+    JwtModule.register({
+      secret: 'camwegoScretKey2022',
+    }),
     MongooseModule.forFeature([
       { name: Travel.name, schema: TravelSchema },
       { name: Trajet.name, schema: TrajetSchema },
@@ -25,7 +28,6 @@ import {CityService} from "../city/city.service";
       { name: Car.name, schema: CarSchema },
       { name: City.name, schema: CitySchema },
     ]),
-    JwtModule,
   ],
   providers: [
     TravelResolver,

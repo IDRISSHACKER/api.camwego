@@ -17,6 +17,9 @@ import { City, CitySchema } from '../city/entity/city.entity';
 
 @Module({
   imports: [
+    JwtModule.register({
+      secret: 'camwegoScretKey2022',
+    }),
     MongooseModule.forFeature([
       { name: Trajet.name, schema: TrajetSchema },
       { name: Travel.name, schema: TravelSchema },
@@ -25,7 +28,6 @@ import { City, CitySchema } from '../city/entity/city.entity';
       { name: Car.name, schema: CarSchema },
       { name: City.name, schema: CitySchema },
     ]),
-    JwtModule,
   ],
   providers: [
     TrajetResolver,
