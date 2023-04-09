@@ -110,9 +110,6 @@ export class UsersService {
       return new Error(error.message);
     }
   }
-  async updateUser(userId: string, updateUserInput: UpdateUserInput) {
-    return this.userModel.updateOne({ _id: userId }, updateUserInput);
-  }
   async dropUser(userId: string) {
     try {
       return this.userModel.findOneAndDelete({
