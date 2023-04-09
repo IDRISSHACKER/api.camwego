@@ -92,7 +92,7 @@ export class UsersService {
         !createUserInput.firstname ||
         !createUserInput.lastname
       ) {
-        return new Error('Tout les chaps sont requis');
+        return new Error('Tout les chaps sont requises');
       }
       if (Object.keys(userInDb).length) {
         return new Error('Ce numero de téléphone est déjà pris!');
