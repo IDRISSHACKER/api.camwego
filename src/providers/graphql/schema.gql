@@ -137,7 +137,6 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   dropUser(userId: String!): Boolean!
   login(password: String!, username: String!): AuthPayload!
-  updateUser(updateUserInput: UpdateUserInput!, userID: String!): User!
 }
 
 type Query {
@@ -209,23 +208,6 @@ type Travel {
 
   """UserID"""
   userID: String!
-}
-
-input UpdateUserInput {
-  """Firstname"""
-  firstname: String
-
-  """Lastname"""
-  lastname: String
-
-  """User password"""
-  password: String
-
-  """User phone"""
-  phone: String
-
-  """User type"""
-  typeId: String
 }
 
 type User {

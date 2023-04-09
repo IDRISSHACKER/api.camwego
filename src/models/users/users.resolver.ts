@@ -55,12 +55,4 @@ export class UsersResolver {
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.usersService.createUser(createUserInput);
   }
-
-  @Mutation(() => User)
-  updateUser(
-    @Args('userID') userID: string,
-    @Args('updateUserInput') updateUserInput: UpdateUserInput,
-  ) {
-    return this.usersService.updateUser(userID, updateUserInput);
-  }
 }
