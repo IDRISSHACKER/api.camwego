@@ -6,18 +6,18 @@
 
 - name: Remove old docker image
   docker_image:
-    name: idrissduval/api.camwego
+    name: idrissduval/api.camwego:latest
     state: absent
 
 - name: pulling image
   docker_image:
-    name: idrissduval/api.camwego
+    name: idrissduval/api.camwego:latest
     source: pull
 
 - name: start app inside a container
   docker_container:
     name: catalogue
-    image: idrissduval/api.camwego
+    image: idrissduval/api.camwego:latest
     state: started
     ports:
       - "8223:8000"
