@@ -1,15 +1,15 @@
 ---
 - name: Stop container
   become: true
-  command: [ "$(docker ps  | grep catalogue)" ] && docker stop catalogue
+  command: '[ "$(docker ps  | grep catalogue)" ] && docker stop catalogue'
 
 - name: Delete container
   become: true
-  command: [ "$(docker ps -a | grep catalogue)" ] && docker rm catalogue
+  command: '[ "$(docker ps -a | grep catalogue)" ] && docker rm catalogue'
 
 - name: Delete Image
   become: true
-  command: [ "$(docker image ls | grep idrissduval/api.camwego)" ] && docker image rm idrissduval/api.camwego
+  command: '[ "$(docker image ls | grep idrissduval/api.camwego)" ] && docker image rm idrissduval/api.camwego'
 
 - name: pulling image
   docker_image:
