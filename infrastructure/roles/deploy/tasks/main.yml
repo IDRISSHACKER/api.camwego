@@ -9,7 +9,7 @@
 
 - name: Delete Image
   become: true
-  command: "docker rm idrissduval/api.camwego"
+  command: "docker image rm idrissduval/api.camwego"
 
 - name: pulling image
   docker_image:
