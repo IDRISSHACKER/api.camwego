@@ -16,7 +16,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Camwego API!"', () => {
-      expect(appController.getHello()).toBe('Camwego API! V1.2');
+      expect(appController.getHello()).toBe('Camwego API! V1.3');
     });
   });
 });
