@@ -2,7 +2,7 @@
 - name: Stop container
   become: true
   command: "docker stop catalogue"
-  when: "[ ! '$(docker ps  | grep catalogue)' ]"
+  when: "docker ps  | grep catalogue"
 
 - name: Delete container
   become: true
