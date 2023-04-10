@@ -1,4 +1,16 @@
 ---
+- name: Stop container
+  become: true
+  command: "docker stop catalogue"
+
+- name: Delete container
+  become: true
+  command: "docker rm catalogue"
+
+- name: Delete Image
+  become: true
+  command: "docker rm idrissduval/api.camwego"
+
 - name: pulling image
   docker_image:
     name: idrissduval/api.camwego
