@@ -33,6 +33,10 @@ jobs:
           command: pnpm install --no-frozen-lockfile
 
       - run:
+          name: Switch to prod Environment
+          command: sed -i "s/PROD=0/PROD=1/g" ./.env
+
+      - run:
           name: Execute test suite
           command: pnpm run test
 

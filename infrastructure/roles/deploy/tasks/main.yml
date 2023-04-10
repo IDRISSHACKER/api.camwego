@@ -1,17 +1,24 @@
 ---
-- name: Stop container
+
+- name: Remove docker container with artefact
+  docker_container:
+    name: catalogue
+    image: idrissduval/api.camwego
+    state: absent
+
+- name: Ensure if container is stopped
   become: true
-  command: "sudo docker ps  | grep catalogue && sudo docker stop catalogue"
+  command: "docker ps  | grep catalogue && sudo docker stop catalogue"
   ignore_errors: true
 
-- name: Delete container
+- name: Ensure if container is deleted
   become: true
-  command: "sudo docker ps -a | sudo grep catalogue && docker rm catalogue"
+  command: "docker ps -a | grep catalogue && docker rm catalogue"
   ignore_errors: true
 
-- name: Delete Image
+- name: Ensure if image is deleted
   become: true
-  command: "sudo docker image ls | grep idrissduval/api.camwego && sudo docker image rm idrissduval/api.camwego"
+  command: "docker image ls | grep idrissduval/api.camwego && docker image rm idrissduval/api.camwego"
   ignore_errors: true
 
 - name: pulling image
