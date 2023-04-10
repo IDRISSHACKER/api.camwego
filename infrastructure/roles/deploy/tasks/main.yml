@@ -7,12 +7,12 @@
 - name: Delete container
   become: true
   command: "docker rm catalogue"
-  when: "[ ! '$(docker ps -a | grep catalogue)' ]"
+  when: "docker ps -a | grep catalogue"
 
 - name: Delete Image
   become: true
   command: "docker image rm idrissduval/api.camwego"
-  when: "[ ! '$(docker image ls | grep idrissduval/api.camwego)' ]"
+  when: "ocker image ls | grep idrissduval/api.camwego*"
 
 - name: pulling image
   docker_image:
