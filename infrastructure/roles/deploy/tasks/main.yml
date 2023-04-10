@@ -2,14 +2,17 @@
 - name: Stop container
   become: true
   command: "sudo docker ps  | grep catalogue && sudo docker stop catalogue"
+  ignore_errors: true
 
 - name: Delete container
   become: true
   command: "sudo docker ps -a | sudo grep catalogue && docker rm catalogue"
+  ignore_errors: true
 
 - name: Delete Image
   become: true
   command: "sudo docker image ls | grep idrissduval/api.camwego && sudo docker image rm idrissduval/api.camwego"
+  ignore_errors: true
 
 - name: pulling image
   docker_image:
