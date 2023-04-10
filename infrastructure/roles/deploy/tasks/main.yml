@@ -1,5 +1,4 @@
 ---
-
 - name: Remove old docker container with artefact
   docker_container:
     name: catalogue
