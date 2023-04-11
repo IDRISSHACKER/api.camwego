@@ -22,7 +22,7 @@ import { CityModule } from './models/city/city.module';
       autoSchemaFile: join(process.cwd(), 'src/providers/graphql/schema.gql'),
       sortSchema: true,
     }),
-    MongooseModule.forRoot(env.PROD ? env.DB_TEST : env.DB, {}),
+    MongooseModule.forRoot(env.PROD ? env.DB : env.DB_TEST, {}),
     UsersModule,
     UserTypeModule,
     CarModule,
