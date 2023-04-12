@@ -23,7 +23,7 @@ export class Travel {
   nbPlace: MongooseSchema.Types.Number;
 
   @Prop()
-  @Field(() => Boolean, { description: 'Accepted', defaultValue: true })
+  @Field(() => Boolean, { description: 'Accepted', defaultValue: false })
   accepted?: boolean;
 
   @Field(() => User, { description: 'User', nullable: true })

@@ -16,6 +16,7 @@ import { JwtAuthGuard } from '../../guard/authGuard';
 import { ReqHeaders } from '../../decorator/req-hrader.decorator';
 import { myHeaders } from '../../interfaces/headers.interface';
 import { JwtService } from '@nestjs/jwt';
+import mongoose, { Schema as MongooseSchema } from 'mongoose';
 
 @Resolver(() => Travel)
 export class TravelResolver {
@@ -67,5 +68,12 @@ export class TravelResolver {
       headers.authorization?.split(' ')[1],
     ).user;
     return this.travelService.setTravel(user._id, createTravelInput);
+  }
+
+  @Mutation(() => Travel)
+  confirmTravel(@Args('travelID') travelID: string) {
+    return this.travelService.confirmTravel(
+      travelID as unknown as MongooseSchema.Types.ObjectId,
+    );
   }
 }

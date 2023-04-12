@@ -130,6 +130,7 @@ scalar DateTime
 
 type Mutation {
   addUserType(createUserTypeInput: CreateUserTypeInput!): UserType!
+  confirmTravel(travelID: String!): Travel!
   createCar(createCarInput: CreateCarInput!): Car!
   createCity(createCityInput: CreateCityInput!): City!
   createTrajet(createTrajetInput: CreateTrajetInput!): Trajet!

@@ -70,9 +70,26 @@ export class TravelService {
     userID: MongooseSchema.Types.ObjectId,
     createTravelInput: CreateTravelInput,
   ) {
+    const userTravels = await this.travelModel.find({
+      userID: userID,
+      trajetID: createTravelInput.trajetID,
+    });
+
+    if (userTravels.length) {
+      return new Error('Vous êtes déjà abonner à ce trajet');
+    }
+
     return this.travelModel.create({
       userID,
       ...createTravelInput,
     });
+  }
+
+  async confirmTravel(travelID: MongooseSchema.Types.ObjectId) {
+    return this.travelModel.findOneAndUpdate(
+      { _id: travelID },
+      { accepted: true },
+      { new: true },
+    );
   }
 }

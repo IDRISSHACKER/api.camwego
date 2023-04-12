@@ -74,13 +74,14 @@ export class UsersService {
           user: userResult,
         };
       } else {
-        return new Error('Email ou mot de passe incorect!');
+        return new Error('Numero de téléphone ou mot de passe incorect!');
       }
     } catch (error) {
       return new Error(error.message);
     }
   }
   async createUser(createUserInput: CreateUserInput) {
+    console.log(createUserInput.typeId);
     try {
       const userInDb = await this.userModel.find({
         phone: createUserInput.phone,
