@@ -77,6 +77,11 @@ input CreateCityInput {
   longitude: String
 }
 
+input CreateMessageInput {
+  content: String!
+  receiverID: String!
+}
+
 input CreateTrajetInput {
   """fromCityID """
   fromCityID: String!
@@ -128,11 +133,22 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Message {
+  _id: String!
+  content: String!
+  readed: Boolean!
+  receiver: User!
+  receiverID: String!
+  user: User!
+  userID: String!
+}
+
 type Mutation {
   addUserType(createUserTypeInput: CreateUserTypeInput!): UserType!
   confirmTravel(travelID: String!): Travel!
   createCar(createCarInput: CreateCarInput!): Car!
   createCity(createCityInput: CreateCityInput!): City!
+  createMessage(createMessageInput: CreateMessageInput!): Message!
   createTrajet(createTrajetInput: CreateTrajetInput!): Trajet!
   createTravel(createTravelInput: CreateTravelInput!): Travel!
   createUser(createUserInput: CreateUserInput!): User!
@@ -143,6 +159,8 @@ type Mutation {
 type Query {
   getCars: [Car!]!
   getCities: [City!]!
+  getMessages: [Message!]!
+  getMyMessages: [Message!]!
   getMyTrajets: [Trajet!]!
   getMyTravels: [Travel!]!
   getTrajets: [Trajet!]!

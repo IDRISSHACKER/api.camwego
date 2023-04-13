@@ -12,6 +12,7 @@ import { CarModule } from './models/car/car.module';
 import { RouteModule } from './models/trajet/route.module';
 import { TravelModule } from './models/travel/travel.module';
 import { CityModule } from './models/city/city.module';
+import { MessageModule } from './models/message/message.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { CityModule } from './models/city/city.module';
     RouteModule,
     TravelModule,
     CityModule,
+    MessageModule,
   ],
   controllers: [AppController],
   providers: [AppService],
