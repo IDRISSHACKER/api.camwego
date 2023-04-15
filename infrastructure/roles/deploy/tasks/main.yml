@@ -1,20 +1,24 @@
 ---
 - name: Remove old docker container with artefact
+  become: true
   docker_container:
     name: catalogue
     state: absent
 
 - name: Remove old docker image
+  become: true
   docker_image:
     name: idrissduval/api.camwego:latest
     state: absent
 
 - name: pulling image
+  become: true
   docker_image:
     name: idrissduval/api.camwego:latest
     source: pull
 
 - name: start app inside a container
+  become: true
   docker_container:
     name: catalogue
     image: idrissduval/api.camwego:latest
