@@ -15,12 +15,13 @@ import { Message, MessageSchema } from './entity/message.entity';
 import { MessageService } from './message.service';
 import { TravelService } from '../travel/travel.service';
 import { Travel, TravelSchema } from '../travel/entity/travel.entity';
-import {MessageResolver} from "./message.resolver";
+import { MessageResolver } from './message.resolver';
+import env from '../../common/constants/settings';
 
 @Module({
   imports: [
     JwtModule.register({
-      secret: 'camwegoScretKey2022',
+      secret: env.KEY,
     }),
     MongooseModule.forFeature([
       { name: Message.name, schema: MessageSchema },

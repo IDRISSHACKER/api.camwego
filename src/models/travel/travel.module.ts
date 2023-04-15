@@ -14,11 +14,12 @@ import { TrajetService } from '../trajet/trajet.service';
 import { TravelService } from './travel.service';
 import { City, CitySchema } from '../city/entity/city.entity';
 import { CityService } from '../city/city.service';
+import env from '../../common/constants/settings';
 
 @Module({
   imports: [
     JwtModule.register({
-      secret: 'camwegoScretKey2022',
+      secret: env.KEY,
     }),
     MongooseModule.forFeature([
       { name: Travel.name, schema: TravelSchema },

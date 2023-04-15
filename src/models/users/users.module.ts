@@ -8,11 +8,12 @@ import { UserType, UserTypeSchema } from '../user_type/entity/userType.entity';
 import { UserTypeService } from '../user_type/userType.service';
 import { Car, CarSchema } from '../car/entity/car';
 import { CarService } from '../car/car.service';
+import env from '../../common/constants/settings';
 
 @Module({
   imports: [
     JwtModule.register({
-      secret: 'camwegoScretKey2022',
+      secret: env.KEY,
       signOptions: { expiresIn: '20h' },
     }),
     MongooseModule.forFeature([

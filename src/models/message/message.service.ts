@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserTypeService } from '../user_type/userType.service';
 import { Message } from './entity/message.entity';
 import { CreateMessageInput } from './dto/createMessage.input';
-import {UsersService} from "../users/users.service";
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class MessageService {
@@ -38,13 +38,13 @@ export class MessageService {
   async findMyMessages(myID: MongooseSchema.Types.ObjectId) {
     try {
       const messages = await this.messageModel.find({
-        userID: myID,
+        $or: [{ receiverID: myID }, { userID: myID }],
       });
 
       if (!messages) {
         return new Error('Not message found');
       }
-      return messages;
+      return [...messages];
     } catch (error) {
       return new Error(error.message);
     }

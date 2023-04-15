@@ -73,7 +73,7 @@ jobs:
           command: apt install sshpass
 
       - run:
-          no_output_timeout: 30m
+          no_output_timeout: 120m
           name: Deploy app in production
           command: ansible-playbook ./infrastructure/deploy.yml
 
