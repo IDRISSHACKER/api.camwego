@@ -34,7 +34,9 @@ export class UsersResolver {
   @ResolveField('avatar', () => UserType)
   async avatar(@Parent() user: User) {
     const userInDB = await this.usersService.findOne(user._id);
-    return `${env.DRIVER_PATH}/${userInDB.avatar}`;
+    return `${env.PROD ? env.DRIVER_PATH_PROD : env.DRIVER_PATH_TEST}/${
+      userInDB.avatar ? userInDB.avatar : 'default.png'
+    }`;
   }
 
   @Query(() => [User])
@@ -44,8 +46,11 @@ export class UsersResolver {
 
   @UseGuards(JwtAuthGuard)
   @Query(() => [User])
-  async me(@Args('id') id: string) {
-    return this.usersService.me(id);
+  async me(@ReqHeaders() headers: myHeaders) {
+    const user: User = this.jwtService.verify(
+      headers.authorization?.split(' ')[1],
+    ).user;
+    return this.usersService.me(String(user._id));
   }
 
   @Mutation(() => AuthPayload)
