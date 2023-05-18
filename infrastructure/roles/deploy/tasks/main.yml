@@ -3,7 +3,8 @@
   become: true
   docker_container:
     name: catalogue
-    state: absent
+    state: stopped
+    remove: yes
 
 - name: Remove Docker image
   docker_image:
