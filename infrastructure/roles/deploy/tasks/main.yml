@@ -1,4 +1,10 @@
 ---
+- name: Remove old docker container with artefact
+  become: true
+  docker_container:
+    name: catalogue
+    state: absent
+
 - name: pulling image
   become: true
   docker_image:
