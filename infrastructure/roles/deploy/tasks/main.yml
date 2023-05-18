@@ -5,12 +5,6 @@
     name: catalogue
     state: absent
 
-- name: Remove old docker image
-  become: true
-  docker_image:
-    name: idrissduval/api.camwego:latest
-    state: absent
-
 - name: pulling image
   become: true
   docker_image:
