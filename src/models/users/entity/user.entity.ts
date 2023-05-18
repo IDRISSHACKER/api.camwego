@@ -29,6 +29,14 @@ export class User {
   @Field(() => String, { description: 'User type id', nullable: true })
   typeId?: MongooseSchema.Types.ObjectId;
 
+  @Prop()
+  @Field(() => String, {
+    description: 'User Avatar',
+    nullable: true,
+    defaultValue: 'default-avatar.jpeg',
+  })
+  avatar?: string;
+
   @Field(() => UserType, { description: 'User Type', nullable: true })
   userType: UserType;
 }

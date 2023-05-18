@@ -5,6 +5,7 @@ import { CreateUserInput } from './dto/createUser.input';
 import { User } from './entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { UserTypeService } from '../user_type/userType.service';
+import { UpdateUserInput } from './dto/updateUser.input';
 
 @Injectable()
 export class UsersService {
@@ -110,6 +111,20 @@ export class UsersService {
       return new Error(error.message);
     }
   }
+
+  async updateUser(
+    userID: MongooseSchema.Types.ObjectId,
+    updateUserInput: UpdateUserInput,
+  ) {
+    const user = await this.userModel.findOne({ _id: userID });
+
+    if (Object.keys(user).length) {
+      return this.userModel.updateOne({ _id: userID }, updateUserInput);
+    } else {
+      return new Error("Une erreur s'est produite !");
+    }
+  }
+
   async dropUser(userId: string) {
     try {
       return this.userModel.findOneAndDelete({

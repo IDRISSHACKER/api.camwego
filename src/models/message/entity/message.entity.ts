@@ -4,22 +4,22 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { User } from '../../users/entity/user.entity';
 
 @Schema()
-@ObjectType('Message')
+@ObjectType('Message', {})
 export class Message {
-  @Field(() => String)
-  _id: MongooseSchema.Types.ObjectId;
+  @Field(() => String, { nullable: true })
+  _id?: MongooseSchema.Types.ObjectId;
 
   @Prop()
-  @Field(() => String)
-  userID: MongooseSchema.Types.ObjectId;
+  @Field(() => String, { nullable: true })
+  userID?: MongooseSchema.Types.ObjectId;
 
   @Prop()
-  @Field(() => String)
-  receiverID: MongooseSchema.Types.ObjectId;
+  @Field(() => String, { nullable: true })
+  receiverID?: MongooseSchema.Types.ObjectId;
 
   @Prop()
-  @Field(() => String)
-  content: string;
+  @Field(() => String, { nullable: true })
+  content?: string;
 
   @Prop()
   @Field(() => Boolean, { defaultValue: false })

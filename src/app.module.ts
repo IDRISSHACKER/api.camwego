@@ -22,6 +22,7 @@ import { MessageModule } from './models/message/message.module';
       playground: !env.PROD,
       autoSchemaFile: join(process.cwd(), 'src/providers/graphql/schema.gql'),
       sortSchema: true,
+      installSubscriptionHandlers: true,
     }),
     MongooseModule.forRoot(env.PROD ? env.DB : env.DB_TEST, {}),
     UsersModule,

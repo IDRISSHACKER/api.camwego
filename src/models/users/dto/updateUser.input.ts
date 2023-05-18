@@ -11,6 +11,9 @@ export class UpdateUserInput {
   @Field(() => String, { description: 'User phone', nullable: true })
   phone?: string;
 
+  @Field(() => String, { description: 'Avatar', nullable: true })
+  avatar?: string;
+
   @Field(() => String, { description: 'User password', nullable: true })
   password?: string;
 
