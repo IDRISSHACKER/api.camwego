@@ -4,7 +4,7 @@
   docker_container:
     name: catalogue
     state: stopped
-    remove: yes
+    auto_remove: yes
 
 - name: Remove Docker image
   docker_image:
