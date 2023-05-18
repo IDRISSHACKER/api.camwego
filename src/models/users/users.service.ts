@@ -75,7 +75,7 @@ export class UsersService {
           user: userResult,
         };
       } else {
-        return new Error('Numero de téléphone ou mot de passe incorect!');
+        return new Error('Numero de téléphone ou mot de passe incorect!.');
       }
     } catch (error) {
       return new Error(error.message);
