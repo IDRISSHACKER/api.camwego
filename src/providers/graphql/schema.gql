@@ -153,6 +153,7 @@ type Mutation {
   createTravel(createTravelInput: CreateTravelInput!): Travel!
   createUser(createUserInput: CreateUserInput!): User!
   dropUser(userId: String!): Boolean!
+  handlerModifyUser(updateUserInput: UpdateUserInput!): User!
   login(password: String!, username: String!): AuthPayload!
 }
 
@@ -233,8 +234,31 @@ type Travel {
   userID: String!
 }
 
+input UpdateUserInput {
+  """Avatar"""
+  avatar: String
+
+  """Firstname"""
+  firstname: String
+
+  """Lastname"""
+  lastname: String
+
+  """User password"""
+  password: String
+
+  """User phone"""
+  phone: String
+
+  """User type"""
+  typeId: String
+}
+
 type User {
   _id: String
+
+  """User Avatar"""
+  avatar: String
 
   """Firstname"""
   firstname: String!

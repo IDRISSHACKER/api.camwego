@@ -112,7 +112,7 @@ export class UsersService {
     }
   }
 
-  async updateUser(
+  async modifyUser(
     userID: MongooseSchema.Types.ObjectId,
     updateUserInput: UpdateUserInput,
   ) {
