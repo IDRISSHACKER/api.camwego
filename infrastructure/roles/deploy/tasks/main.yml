@@ -7,7 +7,7 @@
 
 - name: Remove Image
   become: true
-  docker_container:
+  docker_image:
     name: idrissduval/api.camwego:latest
     state: absent
 
