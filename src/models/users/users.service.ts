@@ -112,14 +112,19 @@ export class UsersService {
     }
   }
 
-  async modifyUser(userID: string, updateUserInput: UpdateUserInput) {
-    const user = await this.userModel.findOne({ _id: userID });
+  async update(
+    userID: string,
+    updateUserInput: UpdateUserInput,
+  ): Promise<User> {
+    const updateUser = this.userModel.findOneAndUpdate(
+      { _id: userID },
+      updateUserInput,
+      {
+        new: true,
+      },
+    );
 
-    if (Object.keys(user).length) {
-      return this.userModel.updateOne({ _id: userID }, updateUserInput);
-    } else {
-      return new Error("Une erreur s'est produite !");
-    }
+    return updateUser;
   }
 
   async dropUser(userId: string) {

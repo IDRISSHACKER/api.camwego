@@ -69,13 +69,19 @@ export class UsersResolver {
 
   @UseGuards(JwtAuthGuard)
   @Mutation(() => User)
-  handlerModifyUser(
+  async updateUser(
+    @Args('input') input: UpdateUserInput,
     @ReqHeaders() headers: myHeaders,
-    @Args('updateUserInput') updateUserInput: UpdateUserInput,
   ) {
     const user: User = this.jwtService.verify(
       headers.authorization?.split(' ')[1],
     ).user;
-    return this.usersService.modifyUser(String(user._id), updateUserInput);
+
+    const updateResult = await this.usersService.update(
+      String(user._id),
+      input,
+    );
+
+    return updateResult;
   }
 }

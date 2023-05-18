@@ -153,8 +153,8 @@ type Mutation {
   createTravel(createTravelInput: CreateTravelInput!): Travel!
   createUser(createUserInput: CreateUserInput!): User!
   dropUser(userId: String!): Boolean!
-  handlerModifyUser(updateUserInput: UpdateUserInput!): User!
   login(password: String!, username: String!): AuthPayload!
+  updateUser(input: UpdateUserInput!): User!
 }
 
 type Query {
