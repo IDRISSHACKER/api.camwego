@@ -3,10 +3,13 @@
   become: true
   docker_container:
     name: catalogue
-    state: stopped
-    image:  idrissduval/api.camwego:latest
-    auto_remove: yes
+    state: absent
 
+- name: Remove Image
+  become: true
+  docker_container:
+    name: idrissduval/api.camwego:latest
+    state: absent
 
 - name: pulling image
   become: true
