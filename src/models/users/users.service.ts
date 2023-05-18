@@ -112,10 +112,7 @@ export class UsersService {
     }
   }
 
-  async modifyUser(
-    userID: MongooseSchema.Types.ObjectId,
-    updateUserInput: UpdateUserInput,
-  ) {
+  async modifyUser(userID: string, updateUserInput: UpdateUserInput) {
     const user = await this.userModel.findOne({ _id: userID });
 
     if (Object.keys(user).length) {

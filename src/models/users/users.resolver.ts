@@ -76,6 +76,6 @@ export class UsersResolver {
     const user: User = this.jwtService.verify(
       headers.authorization?.split(' ')[1],
     ).user;
-    return this.usersService.modifyUser(user._id, updateUserInput);
+    return this.usersService.modifyUser(String(user._id), updateUserInput);
   }
 }
