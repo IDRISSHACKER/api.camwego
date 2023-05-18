@@ -10,6 +10,7 @@
   docker_image:
     name: idrissduval/api.camwego:latest
     state: absent
+    force: true
 
 - name: pulling image
   become: true
