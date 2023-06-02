@@ -10,7 +10,7 @@
 - name: switch to production env
   become: true
   command:
-    cmd: sed -i "s/PROD=0/PROD=1/g" ./.env
+    cmd: sed -i "s/PROD=0/PROD=1/g" ./api.camwego/.env
 
 - name: kill existing service
   become: true
