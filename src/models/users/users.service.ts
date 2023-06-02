@@ -6,7 +6,7 @@ import { User } from './entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { UserTypeService } from '../user_type/userType.service';
 import { UpdateUserInput } from './dto/updateUser.input';
-import {TravelService} from "../travel/travel.service";
+import { TravelService } from '../travel/travel.service';
 
 @Injectable()
 export class UsersService {
@@ -138,9 +138,4 @@ export class UsersService {
       return new Error(error.message);
     }
   }
-
-  async getMyContacts() {
-    const contacts = this.travelService.
-  }
-
 }
