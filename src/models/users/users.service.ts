@@ -6,7 +6,6 @@ import { User } from './entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { UserTypeService } from '../user_type/userType.service';
 import { UpdateUserInput } from './dto/updateUser.input';
-import { TravelService } from '../travel/travel.service';
 
 @Injectable()
 export class UsersService {
@@ -14,7 +13,6 @@ export class UsersService {
     @InjectModel(User.name)
     private readonly userModel: Model<User>,
     private readonly userTypeService: UserTypeService,
-    private readonly travelService: TravelService,
     private jwtService: JwtService,
   ) {}
 
@@ -138,4 +136,6 @@ export class UsersService {
       return new Error(error.message);
     }
   }
+
+
 }
