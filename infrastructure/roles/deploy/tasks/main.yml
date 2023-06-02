@@ -3,7 +3,7 @@
   become: true
   git:
     repo: "https://github.com/IDRISSHACKER/api.camwego.git"
-    dest: "./"
+    dest: "./api.camwego"
     clone: yes
     update: yes
 
@@ -15,13 +15,13 @@
 - name: kill existing service
   become: true
   docker_compose:
-    project_src: "./"
+    project_src: "./api.camwego"
     state: absent
 
 - name: Create and start container
   become: true
   docker_compose:
-    project_src: "./"
+    project_src: "./api.camwego"
   register: output
 
 - name: Show container logs
