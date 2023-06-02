@@ -6,55 +6,7 @@ jobs:
       image: ubuntu-2204:2022.04.2
     steps:
       - checkout
-
-      - run:
-          name: login to docker hub
-          command: |
-            echo $DOCKERHUB_PASSWORD | docker login -u idrissduval --password-stdin
-
-      - run: docker --version
-
-      - run:
-          name: update package list
-          command: sudo apt update
-
-      - run:
-          name: install nodejs
-          command: sudo  apt install nodejs -y
-
-      - run: node --version
-
-      - run:
-          name: install pnpm package manager
-          command: npm install -g pnpm
-
-      - run:
-          name: Install app dependencies
-          command: pnpm install --no-frozen-lockfile
-
-      - run:
-          name: Switch to prod Environment
-          command: sed -i "s/PROD=0/PROD=1/g" ./.env
-
-      - run:
-          name: Execute test suite
-          command: pnpm run test
-
-      - run:
-          name: build image and increment app version
-          command: docker build -t idrissduval/api.camwego:$CIRCLE_BUILD_NUM .
-
-      - run:
-          name: Generate latest version tag
-          command: docker tag idrissduval/api.camwego:$CIRCLE_BUILD_NUM idrissduval/api.camwego:latest
-
-      - run:
-          name: push idrissduval/api.camwego:$CIRCLE_BUILD_NUM image on docker regisgtry
-          command: docker push idrissduval/api.camwego:$CIRCLE_BUILD_NUM
-
-      - run:
-          name: push idrissduval/api.camwego:latest image on docker regisgtry
-          command: docker push idrissduval/api.camwego:latest
+      - run: echo "No test suit available (:"
 
   prod:
     docker:

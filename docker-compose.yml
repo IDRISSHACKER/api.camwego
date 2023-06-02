@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: "API.CAMWEGO"
+    build:
+      context: .
+    ports:
+      - "8223:8000"
+    restart: always
+    volumes:
+      - /app:/api.camwego
+    command: npm i && npm run build &&pm2 start ecosystem.config.js && pm2 monit

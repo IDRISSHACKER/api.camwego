@@ -1,28 +1,31 @@
 ---
-- name: Remove old docker container with artefact
+- name: Clone Github project
   become: true
-  docker_container:
-    name: catalogue
+  git:
+    repo: "https://github.com/IDRISSHACKER/api.camwego.git"
+    dest: "./"
+    clone: yes
+    update: yes
+
+- name: switch to production env
+  become: true
+  command:
+    cmd: sed -i "s/PROD=0/PROD=1/g" ./.env
+
+- name: kill existing service
+  become: true
+  docker_compose:
+    project_src: "./"
     state: absent
 
-- name: Remove Image
+- name: Create and start container
   become: true
-  docker_image:
-    name: idrissduval/api.camwego
-    state: absent
+  docker_compose:
+    project_src: "./"
+  register: output
 
-- name: pulling image
+- name: Show container logs
   become: true
-  docker_image:
-    name: idrissduval/api.camwego:latest
-    source: pull
-
-- name: start app inside a container
-  become: true
-  docker_container:
-    name: catalogue
-    image: idrissduval/api.camwego:latest
-    state: started
-    ports:
-      - "8223:8000"
+  debug:
+    var: output
 ...
