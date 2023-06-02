@@ -116,15 +116,9 @@ export class UsersService {
     userID: string,
     updateUserInput: UpdateUserInput,
   ): Promise<User> {
-    const updateUser = this.userModel.findOneAndUpdate(
-      { _id: userID },
-      updateUserInput,
-      {
-        new: true,
-      },
-    );
-
-    return updateUser;
+    return this.userModel.findOneAndUpdate({ _id: userID }, updateUserInput, {
+      new: true,
+    });
   }
 
   async dropUser(userId: string) {
@@ -136,6 +130,4 @@ export class UsersService {
       return new Error(error.message);
     }
   }
-
-
 }
