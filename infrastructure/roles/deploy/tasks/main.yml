@@ -23,6 +23,7 @@
   become: true
   docker_compose:
     project_src: "./api.camwego"
+    build: true
   register: output
 
 - name: Show container logs
