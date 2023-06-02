@@ -6,6 +6,7 @@
     dest: "./api.camwego"
     clone: yes
     update: yes
+    force: yes
 
 - name: switch to production env
   become: true
