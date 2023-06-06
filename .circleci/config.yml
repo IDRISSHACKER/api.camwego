@@ -39,7 +39,7 @@ jobs:
 
       - run:
           name: Generate latest version tag
-          command: docker tag idrissduval/api.camwego:$CIRCLE_BUILD_NUM idrissduval/nfs:latest
+          command: docker tag idrissduval/api.camwego:$CIRCLE_BUILD_NUM idrissduval/api.camwego:latest
 
       - run:
           name: save image on docker regisgtry
