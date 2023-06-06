@@ -1,12 +1,53 @@
 version: 2.1
 
 jobs:
+
   test:
     machine:
       image: ubuntu-2204:2022.04.2
     steps:
       - checkout
-      - run: echo "No test suit available (:"
+
+      - run:
+          name: login to docker hub
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login --username idrissduval --password-stdin
+
+      - run: docker --version
+
+      - run:
+          name: update package list
+          command: sudo apt update
+
+      - run:
+          name: install nodejs
+          command: sudo  apt install nodejs -y
+
+      - run: node --version
+
+      - run:
+          name: Install app dependencies
+          command: npm install  --frozen-lockfile
+
+      - run:
+          name: Execute test suite
+          command: npm run test
+
+      - run:
+          name: build image
+          command: docker build -t idrissduval/api.camwego:$CIRCLE_BUILD_NUM .
+
+      - run:
+          name: Generate latest version tag
+          command: docker tag idrissduval/api.camwego:$CIRCLE_BUILD_NUM idrissduval/nfs:latest
+
+      - run:
+          name: save image on docker regisgtry
+          command: docker push idrissduval/api.camwego:$CIRCLE_BUILD_NUM
+
+      - run:
+          name: save latest image tag on docker regisgtry
+          command: docker push idrissduval/api.camwego:latest
 
   prod:
     docker:
