@@ -16,25 +16,39 @@ type Car {
   """Brand of car"""
   brand: String
 
-  """Gray card"""
-  grayCard: String
+  """Car color"""
+  color: String
+  createdAt: DateTime
+
+  """Car model"""
+  model: String
 
   """Places"""
   nbPace: Float
 
-  """Registration"""
-  registration: String
-
-  """Technical visit"""
-  technicalVisit: String
+  """Car registration number"""
+  registrationNumber: String
+  updatedAt: DateTime
   user: User!
 
   """User id"""
   userId: String
+
+  """Car year"""
+  year: String
+}
+
+type CheckPhonePayload {
+  """is registered"""
+  alreadyRegistered: Boolean!
+
+  """phone"""
+  phone: String!
 }
 
 type City {
   _id: String
+  createdAt: DateTime
 
   """Name of city"""
   label: String!
@@ -44,26 +58,32 @@ type City {
 
   """Longitude"""
   longitude: String
+  updatedAt: DateTime
 }
 
 input CreateCarInput {
-  """Brand of car"""
-  brand: String!
+  _id: String
 
-  """Gray card"""
-  grayCard: String!
+  """Brand of car"""
+  brand: String
+
+  """Car color"""
+  color: String
+
+  """Car model"""
+  model: String
 
   """Places"""
   nbPace: Float
 
-  """Registration"""
-  registration: String!
-
-  """Technical visit"""
-  technicalVisit: String!
+  """Car registration number"""
+  registrationNumber: String
 
   """User id"""
-  userId: String!
+  userId: String
+
+  """Car year"""
+  year: String
 }
 
 input CreateCityInput {
@@ -107,8 +127,23 @@ input CreateTravelInput {
 }
 
 input CreateUserInput {
+  """user avaar"""
+  avatar: String
+
+  """national identity card"""
+  cni: String
+
+  """driversLicense"""
+  driversLicense: String
+
+  """User email"""
+  email: String
+
   """Firstname"""
   firstname: String!
+
+  """gray card"""
+  grayCard: String
 
   """Lastname"""
   lastname: String!
@@ -118,6 +153,9 @@ input CreateUserInput {
 
   """User phone"""
   phone: String!
+
+  """technical visit"""
+  technicalVisit: String
 
   """User type"""
   typeId: String
@@ -136,15 +174,18 @@ scalar DateTime
 type Message {
   _id: String
   content: String
+  createdAt: DateTime
   readed: Boolean!
   receiver: User!
   receiverID: String
+  updatedAt: DateTime
   user: User!
   userID: String
 }
 
 type Mutation {
   addUserType(createUserTypeInput: CreateUserTypeInput!): UserType!
+  addVerifyPhone(phone: String!): PhoneVerifyEntity!
   confirmTravel(travelID: String!): Travel!
   createCar(createCarInput: CreateCarInput!): Car!
   createCity(createCityInput: CreateCityInput!): City!
@@ -155,9 +196,20 @@ type Mutation {
   dropUser(userId: String!): Boolean!
   login(password: String!, username: String!): AuthPayload!
   updateUser(input: UpdateUserInput!): User!
+  verifyPhone(code: String!, phone: String!): PhoneVerifyEntity!
+}
+
+type PhoneVerifyEntity {
+  _id: String
+  code: String!
+  createdAt: DateTime
+  phone: String!
+  updatedAt: DateTime
+  verified: Boolean!
 }
 
 type Query {
+  checkUser(phone: String!): CheckPhonePayload!
   getCars: [Car!]!
   getCities: [City!]!
   getMessages: [Message!]!
@@ -169,6 +221,7 @@ type Query {
   getUserTypes: [UserType!]!
   getUsers: [User!]!
   me: [User!]!
+  requestAllPhoneVerify: [PhoneVerifyEntity!]!
 }
 
 type Subscription {
@@ -183,6 +236,7 @@ type Trajet {
 
   """carID """
   carID: String!
+  createdAt: DateTime
 
   """City Model"""
   from: City!
@@ -204,6 +258,7 @@ type Trajet {
 
   """toCityID"""
   toCityID: String!
+  updatedAt: DateTime
 
   """User (Intance of user)"""
   user: User!
@@ -217,6 +272,7 @@ type Travel {
 
   """Accepted"""
   accepted: Boolean!
+  createdAt: DateTime
 
   """number of user"""
   nbPlace: Float!
@@ -226,6 +282,7 @@ type Travel {
 
   """TrajetID"""
   trajetID: String!
+  updatedAt: DateTime
 
   """User"""
   user: User
@@ -238,8 +295,20 @@ input UpdateUserInput {
   """Avatar"""
   avatar: String
 
+  """national identity card"""
+  cni: String
+
+  """driversLicense"""
+  driversLicense: String
+
+  """User email"""
+  email: String
+
   """Firstname"""
   firstname: String
+
+  """gray card"""
+  grayCard: String
 
   """Lastname"""
   lastname: String
@@ -249,6 +318,9 @@ input UpdateUserInput {
 
   """User phone"""
   phone: String
+
+  """technical visit"""
+  technicalVisit: String
 
   """User type"""
   typeId: String
@@ -260,8 +332,21 @@ type User {
   """User Avatar"""
   avatar: String
 
+  """national identity card"""
+  cni: String
+  createdAt: DateTime
+
+  """driversLicense"""
+  driversLicense: String
+
+  """User email"""
+  email: String
+
   """Firstname"""
   firstname: String!
+
+  """gray card"""
+  grayCard: String
 
   """Lastname"""
   lastname: String!
@@ -272,16 +357,25 @@ type User {
   """User phone"""
   phone: String!
 
+  """technical visit"""
+  technicalVisit: String
+
   """User type id"""
   typeId: String
+  updatedAt: DateTime
 
   """User Type"""
   userType: UserType
+
+  """Verified"""
+  verified: String
 }
 
 type UserType {
   _id: String
+  createdAt: DateTime
 
   """label"""
   label: String
+  updatedAt: DateTime
 }

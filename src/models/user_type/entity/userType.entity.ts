@@ -11,6 +11,13 @@ export class UserType {
   @Prop()
   @Field(() => String, { description: 'label', nullable: true })
   label: string;
+
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date;
+
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date;
 }
 
 export const UserTypeSchema = SchemaFactory.createForClass(UserType);
+UserTypeSchema.set('timestamps', true);

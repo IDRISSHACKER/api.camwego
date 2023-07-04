@@ -13,6 +13,7 @@ import { RouteModule } from './models/trajet/route.module';
 import { TravelModule } from './models/travel/travel.module';
 import { CityModule } from './models/city/city.module';
 import { MessageModule } from './models/message/message.module';
+import { PhoneVerifyModule } from './models/phoneVerify/phoneVerify.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { MessageModule } from './models/message/message.module';
     TravelModule,
     CityModule,
     MessageModule,
+    PhoneVerifyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

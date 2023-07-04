@@ -30,6 +30,13 @@ export class Message {
 
   @Field(() => User)
   receiver: User;
+
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date;
+
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date;
 }
 
 export const MessageSchema = SchemaFactory.createForClass(Message);
+MessageSchema.set('timestamps', true);

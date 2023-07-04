@@ -22,6 +22,10 @@ export class User {
   phone: string;
 
   @Prop()
+  @Field(() => String, { description: 'User email', nullable: true })
+  email?: string;
+
+  @Prop()
   @Field(() => String, { description: 'User password' })
   password: string;
 
@@ -39,6 +43,40 @@ export class User {
 
   @Field(() => UserType, { description: 'User Type', nullable: true })
   userType: UserType;
+
+  @Prop()
+  @Field(() => String, {
+    nullable: true,
+    description: 'national identity card',
+  })
+  cni?: string;
+
+  @Prop()
+  @Field(() => String, { nullable: true, description: 'gray card' })
+  grayCard?: string;
+
+  @Prop()
+  @Field(() => String, { nullable: true, description: 'technical visit' })
+  technicalVisit?: string;
+
+  @Prop()
+  @Field(() => String, {
+    nullable: true,
+    description: 'Verified',
+    defaultValue: false,
+  })
+  verified?: boolean;
+
+  @Prop()
+  @Field(() => String, { nullable: true, description: 'driversLicense' })
+  driversLicense?: string;
+
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date;
+
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+UserSchema.set('timestamps', true);

@@ -19,6 +19,13 @@ export class City {
   @Prop()
   @Field(() => String, { description: 'Longitude', nullable: true })
   longitude?: string;
+
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date;
+
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date;
 }
 
 export const CitySchema = SchemaFactory.createForClass(City);
+CitySchema.set('timestamps', true);

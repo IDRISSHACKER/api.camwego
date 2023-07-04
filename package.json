@@ -29,6 +29,7 @@
     "@nestjs/passport": "^9.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "@types/dotenv": "^8.2.0",
+    "@types/underscore": "^1.11.5",
     "apollo-server-express": "^3.11.1",
     "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
@@ -36,9 +37,13 @@
     "graphql-ws": "^5.12.1",
     "mime-type": "^4.0.0",
     "mongoose": "^6.9.0",
+    "mongoose-timestamp": "^0.6.0",
+    "random-int": "^3.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
     "ts-morph": "^17.0.1",
+    "underscore": "^1.13.6",
+    "unique-random": "^3.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

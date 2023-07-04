@@ -9,6 +9,11 @@ import { UserTypeService } from '../user_type/userType.service';
 import { Car, CarSchema } from '../car/entity/car';
 import { CarService } from '../car/car.service';
 import env from '../../common/constants/settings';
+import { PhoneVerifyService } from '../phoneVerify/phoneVerify.service';
+import {
+  PhoneVerifyEntity,
+  PhoneVerifySchema,
+} from '../phoneVerify/entity/phoneVerify.entity';
 
 @Module({
   imports: [
@@ -20,8 +25,15 @@ import env from '../../common/constants/settings';
       { name: User.name, schema: UserSchema },
       { name: UserType.name, schema: UserTypeSchema },
       { name: Car.name, schema: CarSchema },
+      { name: PhoneVerifyEntity.name, schema: PhoneVerifySchema },
     ]),
   ],
-  providers: [UsersResolver, UsersService, UserTypeService, CarService],
+  providers: [
+    UsersResolver,
+    UsersService,
+    UserTypeService,
+    CarService,
+    PhoneVerifyService,
+  ],
 })
 export class UsersModule {}

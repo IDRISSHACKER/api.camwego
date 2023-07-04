@@ -11,19 +11,21 @@ import { CreateUserInput } from './dto/createUser.input';
 import { User } from './entity/user.entity';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../guard/authGuard';
-import { AuthPayload } from './entity/auth.entity';
+import { AuthPayload, CheckPhonePayload } from './entity/auth.entity';
 import { ReqHeaders } from '../../decorator/req-hrader.decorator';
 import { UserType } from '../user_type/entity/userType.entity';
 import { myHeaders } from '../../interfaces/headers.interface';
 import { UpdateUserInput } from './dto/updateUser.input';
 import { JwtService } from '@nestjs/jwt';
 import env from '../../common/constants/settings';
+import { PhoneVerifyService } from '../phoneVerify/phoneVerify.service';
 
 @Resolver(() => User)
 export class UsersResolver {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
+    private readonly phoneVerifyService: PhoneVerifyService,
   ) {}
 
   @ResolveField('userType', () => UserType)
@@ -59,6 +61,15 @@ export class UsersResolver {
     @Args('password') password: string,
   ) {
     return await this.usersService.login(username, password);
+  }
+
+  @Query(() => CheckPhonePayload)
+  async checkUser(@Args('phone') phone: string) {
+    const checkResult = await this.usersService.checkUserPhone(phone);
+    if (!checkResult.alreadyRegistered) {
+      await this.phoneVerifyService.add(phone);
+    }
+    return checkResult;
   }
 
   @UseGuards(JwtAuthGuard)

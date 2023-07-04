@@ -52,6 +52,13 @@ export class Trajet {
     defaultValue: 0,
   })
   nbPlaceOccupied?: MongooseSchema.Types.Number;
+
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date;
+
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date;
 }
 
 export const TrajetSchema = SchemaFactory.createForClass(Trajet);
+TrajetSchema.set('timestamps', true);

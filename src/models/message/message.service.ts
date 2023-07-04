@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
-import { JwtService } from '@nestjs/jwt';
-import { UserTypeService } from '../user_type/userType.service';
 import { Message } from './entity/message.entity';
 import { CreateMessageInput } from './dto/createMessage.input';
 import { UsersService } from '../users/users.service';

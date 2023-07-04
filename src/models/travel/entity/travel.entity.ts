@@ -34,6 +34,13 @@ export class Travel {
     nullable: true,
   })
   trajet: Trajet;
+
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date;
+
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date;
 }
 
 export const TravelSchema = SchemaFactory.createForClass(Travel);
+TravelSchema.set('timestamps', true);

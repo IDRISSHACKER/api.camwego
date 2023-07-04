@@ -61,6 +61,20 @@ export class UsersService {
       return new Error(error.message);
     }
   }
+
+  async checkUserPhone(
+    phone: string,
+  ): Promise<{ phone: string; alreadyRegistered: boolean }> {
+    const userResult = await this.userModel.find({
+      phone: phone,
+    });
+
+    return {
+      phone: phone,
+      alreadyRegistered: !!Object.keys(userResult).length,
+    };
+  }
+
   async login(username: string, password: string) {
     try {
       const userResult = await this.userModel.find({
@@ -83,6 +97,7 @@ export class UsersService {
   }
   async createUser(createUserInput: CreateUserInput) {
     console.log(createUserInput.typeId);
+    console.log(createUserInput);
     try {
       const userInDb = await this.userModel.find({
         phone: createUserInput.phone,

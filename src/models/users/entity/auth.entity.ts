@@ -9,3 +9,12 @@ export class AuthPayload {
   @Field(() => [User], { description: 'user' })
   user: User;
 }
+
+@ObjectType()
+export class CheckPhonePayload {
+  @Field(() => String, { description: 'phone' })
+  phone: string;
+
+  @Field(() => Boolean, { description: 'is registered' })
+  alreadyRegistered: boolean;
+}
